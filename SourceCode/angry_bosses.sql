@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2013 at 09:49 AM
+-- Generation Time: Apr 21, 2013 at 03:16 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -32,6 +32,48 @@ CREATE TABLE IF NOT EXISTS `applications` (
   `Emp_ID` int(11) NOT NULL,
   PRIMARY KEY (`App_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departments`
+--
+
+CREATE TABLE IF NOT EXISTS `departments` (
+  `Dept_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Dept_Name` text NOT NULL,
+  PRIMARY KEY (`Dept_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`Dept_ID`, `Dept_Name`) VALUES
+(1, 'Human Resource'),
+(2, 'Administration'),
+(3, 'Marketing & Sales'),
+(4, 'Finance'),
+(5, 'Information Technology'),
+(6, 'Health'),
+(7, 'Internal Audit'),
+(8, 'Customer Relations'),
+(9, 'Business Development'),
+(10, 'Business Support System'),
+(11, 'Quality & Service Assurance');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dept_cmp`
+--
+
+CREATE TABLE IF NOT EXISTS `dept_cmp` (
+  `Dept_Cmp` int(11) NOT NULL AUTO_INCREMENT,
+  `Dept_ID` int(11) NOT NULL,
+  `Cmp_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Dept_Cmp`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
