@@ -141,7 +141,7 @@ input[type="submit"] {
   -webkit-appearance: button;
 }
 
-label,
+
 select,
 button,
 input[type="button"],
@@ -150,6 +150,9 @@ input[type="submit"],
 input[type="radio"],
 input[type="checkbox"] {
   cursor: pointer;
+}
+label{
+  cursor: default;	
 }
 
 input[type="search"] {
