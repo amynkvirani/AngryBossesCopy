@@ -11,9 +11,13 @@
     	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
     	</script>
     <![endif]-->
-	<script>
-        window.onload=makeList;
-    </script>
+    <script>
+		function radioEmployeer(){
+			document.getElementById("employeerform").style.display="block";
+			document.getElementById("employeeform").style.display="none";
+		}
+		window.onload=radioEmployeer;
+	</script>
 </head>
 <body>
 <div class="container-fluid">
@@ -26,11 +30,10 @@
     
     <div class="row-fluid">
         <ul class=" nav nav-tabs" id="loginsignuptabs">
-                <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-                <li><a href="#signup" data-toggle="tab">Sign Up</a></li>
+                <li class="active"><a href="#login" data-toggle="tab" >Login</a></li>
+                <li><a href="#signup" data-toggle="tab" onclick="radioEmployeer()" >Sign Up</a></li>
         </ul>
-    </div>
-    
+    </div>  
     <div class="tab-content">
 
         <div class="tab-pane active" id="login">
@@ -40,16 +43,19 @@
                         <fieldset>
                             <legend>Log In!</legend>
                             <label id="uName">User Name</label>
-                            <input class="input-xxlarge" id="loginuname" type="text">
+                            <input class="input-medium" id="loginuname" type="text">
                             <label id="pass">Password</label>
-                            <input class="input-xxlarge" id="loginpass" type="password">
+                            <input class="input-medium" id="loginpass" type="password">
                           	<label id="login">Login as: </label>
-                            <select required id="loginas">
+                            <select class="span2" required id="loginas">
                                 <option selected value="employee">Employee</option>
                                 <option value="employeer">Employeer</option>
                             </select>
                         </fieldset>
                     </form>
+                    <div class="row-fluid">
+                      <div class="span2"> <button  type="button" class="btn btn-primary" id="button"  data-loading-text="Logging in..." onClick="login()">Log In</button></div>
+                    </div>
             	</div>
             </section>
         </div>
@@ -63,39 +69,93 @@
                     	<button id="type_employee" type="button" class="btn btn-small" onClick="radioEmployee()" >Employee</button>
                     </div>
                     <br>
-                    <div id="employeerform" style="margin-top:25px">
+                    <div id="employeerform" style="margin-top:25px" >
                     	<div class="span12">
                         	<label><b>Company Name</b></label>
                             <input class="input-xlarge" id="newcmpName" type="text"  placeholder="Comany Name">
                             <label><b>About</b></label>
                             <textarea id="newcAbout" placeholder="About" class="span6" rows="6"></textarea>
                             <label><b>Number of Departments</b></label>
-                            <input class="input-small" id="newcNDept" type="number" onchange="makeList()" value="1" min="1" max="10" >
+                            <input class="input-mini" id="newcNDept" type="number" onchange="makeList()" value="1" min="1" max="10" >
                             <label><b>Departments</b></label>
                             <div class="row-fluid"  >
-                            <div class="span3" id="deptdrop">
-                            	<script>
-									function makeList(){
-										var totaldept=document.getElementById("newcNDept").value;
-										manydeptlist(totaldept);
-									}
-									window.onload=makeList;
-                                </script>
+                            	<div class="span2" id="deptdrop">
+									<script>
+                                        function makeList(){
+                                            var totaldept=document.getElementById("newcNDept").value;
+                                            manydeptlist(totaldept);
+                                        }
+                                        window.onload=makeList;
+                                    </script>
                                 </div>
                             </div>
                             <label><b>User Name</b></label>
-                            <input class="input-large" id="newcuname" type="text" placeholder="User Name">
+                            <input class="input-medium" id="newcuname" type="text" placeholder="User Name">
                             <label><b>Password</b></label>
-                            <input class="input-large" id="newcpass" type="password" placeholder="Password">
+                            <input class="input-medium" id="newcpass" type="password" placeholder="Password">
                             <label><b>Email Address</b></label>
                             <input class="input-large" id="newcemail" type="email" placeholder="Email Address">
                             <label><b>Other Information</b></label>
-                            <textarea id="cmpAbout" placeholder="Other Information" rows="6" class="span6"></textarea>
+                            <textarea id="newcInfo" placeholder="Other Information" rows="6" class="span6"></textarea>
                         </div>
-                        
+                        <div class="row-fluid">
+                        	<div class="span2"> <button  type="button" class="btn btn-primary" id="newcbutton"  data-loading-text="Processing..." onClick="newcsubmit()">Submit</button></div>
+                        </div>                        
                     </div>
-                    
-                    <div id="employeeform" style="margin-top:25px">
+                    <div style="margin-top:25px" >
+                    </div>
+                    <div id="employeeform" style="margin-top:25px" >
+                    	<div class="span12" >
+                        	<label><b>Employee Name</b></label>
+                            <input class="input-xlarge" id="newempName" type="text"  placeholder="Employee Name">
+                        	<label><b>Employee Age</b></label>
+                            <input class="input-small" id="newempAge" type="number"  placeholder="Age">
+                        	<label><b>Employee Name</b></label>
+                            <input class="input-large" id="newempDOB" type="date"  placeholder="Employee DOB">
+                            <label><b>Employee Address</b></label>
+                            <textarea id="neweAddress" placeholder="Employee Address" class="span6" rows="6"></textarea>
+                            <label><b>University Name</b></label>
+                            <input class="input-xlarge" id="newempUni" type="text" placeholder="University Name" >
+                            <label><b>Employee Major</b></label>
+                            <input class="input-large" id="newempMajor" type="text" placeholder="Employee Major" >
+                            <label><b>Graduation Date</b></label>
+                            <input class="input-xlarge" id="newempGDate" type="date">
+                            <label><b>Number of Departments</b></label>
+                            <input class="input-mini" id="neweNDept" type="number" onchange="makeListEmp()" value="1" min="1" max="10" >                            
+                            <label><b>Interested Departments</b></label>
+                            <div class="row-fluid"  >
+                            <div class="span2" id="depdrop">
+                            	<script>
+									function makeListEmp(){
+										var totaldep=document.getElementById("neweNDept").value;
+										manydeptlistemp(totaldep);
+									}
+									window.onload=makeListEmp;
+									
+                                </script>
+                                </div>
+                            </div>
+                            <label><b>Preferred City</b></label>
+                            <input class="input-medium" id="neweCity" type="text" placeholder="Preferred City" >
+                            <label><b>Looking for</b></label>
+                            <select class="span1" required id="lookingfor">
+                            	<option value="Internship">Internship</option>
+                                <option value="Job">Job</option>
+                            </select>
+                            <label><b>User Name</b></label>
+                            <input class="input-medium" id="neweuname" type="text" placeholder="User Name">
+                            <label><b>Password</b></label>
+                            <input class="input-medium" id="newepass" type="password" placeholder="Password">
+                            <label><b>Email Address</b></label>
+                            <input class="input-large" id="neweemail" type="email" placeholder="Email Address">
+                            <label><b>Other Information</b></label>
+                            <textarea id="neweInfo" placeholder="Other Information" rows="6" class="span6"></textarea>
+                        </div>
+                        <div class="row-fluid">
+                          <div class="span2"> <button  type="button" class="btn btn-primary" id="newebutton"  data-loading-text="Processing..." onClick="newesubmit()">Submit</button></div>
+                        </div>                     
+                    </div>
+                    <div style="margin-top:25px" >
                     </div>
             	
                 </div>
@@ -104,17 +164,24 @@
     </div>
 </div>
 <script>
+	function radioEmployeer(){
+		makeList();
+		document.getElementById("employeerform").style.display="block";
+		document.getElementById("employeeform").style.display="none";
+	}
+	function radioEmployee(){
+		document.getElementById("employeerform").style.display="none";
+		document.getElementById("employeeform").style.display="block";		
+	}
+
 	function onedeptlist(idname){
 		
-		var opt="<option selected value='employee'>Employee</option><option value='employeer'><?php echo('Employeer')?></option>";
-		document.getElementById("deptdrop").innerHTML=document.getElementById("deptdrop").innerHTML+("<select class='span12' required id='"+idname+"'>"+opt+"</select>");
+		//var opt="<option selected value='employee'>Employee</option><option value='employeer'><?php echo('Employeer')?></option>";
+		document.getElementById("deptdrop").innerHTML=document.getElementById("deptdrop").innerHTML+("<select class='span12' required id='"+idname+"'>"+" "+"</select>");
 	}
-	function manydeptlist(count){
-		$(document.getElementById("deptdrop")).empty();
-		for (var i=0;i<count;i++)
-		{ 
-			onedeptlist("deptlist"+i);
-		}
+	function makeListEmp(){
+		var totaldep=document.getElementById("neweNDept").value;
+		manydeptlistemp(totaldep);	
 	}
 	function makeList(){
 		var totaldept=document.getElementById("newcNDept").value;
@@ -123,5 +190,68 @@
 </script>
 <script src="js/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/spin.js"></script>
+<?php echo("<script> function manydeptlistemp(count){
+		$(document.getElementById(\"depdrop\")).empty();")?>
+		
+		<?php
+			$opt1="<option value='";
+			$opt2="'>";
+			$opt3="</option>";
+			include('./db.inc.php');
+			$list="<select>";
+			$query=mysql_query("SELECT Dept_Name FROM `departments` ORDER BY Dept_Name");
+			//$departments = mysql_fetch_array($query, MYSQL_ASSOC);
+			while ($dep = mysql_fetch_array($query, MYSQL_ASSOC)) {
+				$list=$list.$opt1.$dep['Dept_Name'].$opt2.$dep['Dept_Name'].$opt3;
+			}
+			$list=$list."</select>";
+			$test=("document.getElementById('depdrop').innerHTML=\"");
+			//echo($test.$list."\";");
+		?>
+        
+<?php 
+		//onedeptlist(\"deptlist\"+i);
+		echo("		
+		for (var i=0;i<count;i++)
+		{ 
+			document.getElementById(\"depdrop\").innerHTML=document.getElementById(\"depdrop\").innerHTML+(\"".$list."\");
+		}
+	}	
+	</script>");
+	?>
+
+
+<?php echo("<script> function manydeptlist(count){
+		$(document.getElementById(\"deptdrop\")).empty();")?>
+		
+		<?php
+			$opt1="<option value='";
+			$opt2="'>";
+			$opt3="</option>";
+			include('./db.inc.php');
+			$list="<select>";
+			$query=mysql_query("SELECT Dept_Name FROM `departments` ORDER BY Dept_Name");
+			//$departments = mysql_fetch_array($query, MYSQL_ASSOC);
+			while ($dep = mysql_fetch_array($query, MYSQL_ASSOC)) {
+				$list=$list.$opt1.$dep['Dept_Name'].$opt2.$dep['Dept_Name'].$opt3;
+			}
+			$list=$list."</select>";
+			$test=("document.getElementById('deptdrop').innerHTML=\"");
+			//echo($test.$list."\";");
+		?>
+        
+<?php 
+		//onedeptlist(\"deptlist\"+i);
+		echo("		
+		for (var i=0;i<count;i++)
+		{ 
+			document.getElementById(\"deptdrop\").innerHTML=document.getElementById(\"deptdrop\").innerHTML+(\"".$list."\");
+		}
+	}	
+	</script>");
+	?>
+
+
 </body>
 </html>
