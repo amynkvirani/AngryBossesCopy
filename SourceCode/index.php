@@ -72,7 +72,7 @@
                     <div id="employeerform" style="margin-top:25px" >
                     	<div class="span12">
                         	<label><b>Company Name</b></label>
-                            <input class="input-xlarge" id="newcmpName" type="text"  placeholder="Comany Name">
+                            <input class="input-xlarge" id="newcName" type="text"  placeholder="Comany Name">
                             <label><b>About</b></label>
                             <textarea id="newcAbout" placeholder="About" class="span6" rows="6"></textarea>
                             <label><b>Number of Departments</b></label>
@@ -90,11 +90,11 @@
                                 </div>
                             </div>
                             <label><b>User Name</b></label>
-                            <input class="input-medium" id="newcuname" type="text" placeholder="User Name">
+                            <input class="input-medium" id="newcUName" type="text" placeholder="User Name">
                             <label><b>Password</b></label>
-                            <input class="input-medium" id="newcpass" type="password" placeholder="Password">
+                            <input class="input-medium" id="newcPass" type="password" placeholder="Password">
                             <label><b>Email Address</b></label>
-                            <input class="input-large" id="newcemail" type="email" placeholder="Email Address">
+                            <input class="input-large" id="newcEmail" type="email" placeholder="Email Address">
                             <label><b>Other Information</b></label>
                             <textarea id="newcInfo" placeholder="Other Information" rows="6" class="span6"></textarea>
                         </div>
@@ -187,6 +187,73 @@
 		var totaldept=document.getElementById("newcNDept").value;
 		manydeptlist(totaldept);
 	}
+	function get_XmlHttp() {
+	  // create the variable that will contain the instance of the XMLHttpRequest object (initially with null value)
+	  var xmlHttp = null;
+	
+	  if(window.XMLHttpRequest) {		// for Forefox, IE7+, Opera, Safari, ...
+		xmlHttp = new XMLHttpRequest();
+	  }
+	  else if(window.ActiveXObject) {	// for Internet Explorer 5 or 6
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	
+	  return xmlHttp;
+	}
+	function newcsubmit(){
+		var companyname=document.getElementById("newcName").value;
+		var about=document.getElementById("newcAbout").value;
+		var username=document.getElementById("newcUName").value;
+		var password=document.getElementById("newcPass").value;
+		var email=document.getElementById("newcEmail").value;
+		var information=document.getElementById("newcInfo").value;
+
+		var data1='compname='+companyname+'&abt='+about+'&uname='+username+'&pass='+password+'&emailid='+email+'&info='+information;			
+		var request =  get_XmlHttp();		// call the function for the XMLHttpRequest instance
+	 	// create pairs index=value with data that must be sent to server
+	  	request.open("POST", "newcompany.php", true);			// set the request
+		
+		var totaldepartments=document.getElementById("newcNDept").value;
+		//data2='&size='+totaldepartments;
+		for (var i=0;i<totaldepartments;i++){
+			var id="depcmp"+i;
+			//data2=data2+'&depcmp'+i+'='+document.getElementById(id).value;
+		}	
+	  	// adds  a header to tell the PHP script to recognize the data as is sent via POST
+	  	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  	request.send(data1);		// calls the send() method with datas as parameter
+	
+	  // Check request status
+	  // If the response is received completely, will be transferred to the HTML tag with tagID
+	  	request.onreadystatechange = function() {
+			if (request.readyState == 4) {
+		  	document.getElementById("newcbutton").innerHTML = request.responseText;
+			}
+	  	}
+
+				
+	}
+	function ajaxrequest(php_file, tagID) {
+	  var request =  get_XmlHttp();		// call the function for the XMLHttpRequest instance
+	
+	  // create pairs index=value with data that must be sent to server
+	  var  the_data = 'test='+document.getElementById('txt2').innerHTML;
+	
+	  request.open("POST", php_file, true);			// set the request
+	
+	  // adds  a header to tell the PHP script to recognize the data as is sent via POST
+	  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  request.send(the_data);		// calls the send() method with datas as parameter
+	
+	  // Check request status
+	  // If the response is received completely, will be transferred to the HTML tag with tagID
+	  request.onreadystatechange = function() {
+		if (request.readyState == 4) {
+		  document.getElementById(tagID).innerHTML = request.responseText;
+		}
+	  }
+	}	
+
 </script>
 <script src="js/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -199,7 +266,7 @@
 			$opt2="'>";
 			$opt3="</option>";
 			include('./db.inc.php');
-			$list="<select>";
+			$list="<select id='depemp'>";
 			$query=mysql_query("SELECT Dept_Name FROM `departments` ORDER BY Dept_Name");
 			//$departments = mysql_fetch_array($query, MYSQL_ASSOC);
 			while ($dep = mysql_fetch_array($query, MYSQL_ASSOC)) {
@@ -216,6 +283,7 @@
 		for (var i=0;i<count;i++)
 		{ 
 			document.getElementById(\"depdrop\").innerHTML=document.getElementById(\"depdrop\").innerHTML+(\"".$list."\");
+			document.getElementById(\"depemp\").id=\"depemp\"+i;
 		}
 	}	
 	</script>");
@@ -230,7 +298,7 @@
 			$opt2="'>";
 			$opt3="</option>";
 			include('./db.inc.php');
-			$list="<select>";
+			$list="<select id='depcmp'>";
 			$query=mysql_query("SELECT Dept_Name FROM `departments` ORDER BY Dept_Name");
 			//$departments = mysql_fetch_array($query, MYSQL_ASSOC);
 			while ($dep = mysql_fetch_array($query, MYSQL_ASSOC)) {
@@ -247,6 +315,7 @@
 		for (var i=0;i<count;i++)
 		{ 
 			document.getElementById(\"deptdrop\").innerHTML=document.getElementById(\"deptdrop\").innerHTML+(\"".$list."\");
+			document.getElementById(\"depcmp\").id=\"depcmp\"+i;
 		}
 	}	
 	</script>");
