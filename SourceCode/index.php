@@ -54,7 +54,8 @@
                         </fieldset>
                     </form>
                     <div class="row-fluid">
-                      <div class="span2"> <button  type="button" class="btn btn-primary" id="button"  data-loading-text="Logging in..." onClick="login()">Log In</button></div>
+                    	<div class="span2"> <button  type="button" class="btn btn-primary" id="button"  data-loading-text="Logging in..." onClick="login()">Log In</button></div>
+                    	<div class="span3 offset2" id="loginstatus">Not Logged In.</div>
                     </div>
             	</div>
             </section>
@@ -100,6 +101,7 @@
                         </div>
                         <div class="row-fluid">
                         	<div class="span2"> <button  type="button" class="btn btn-primary" id="newcbutton"  data-loading-text="Processing..." onClick="newcsubmit()">Submit</button></div>
+                            <div class="span4 offset2" id="result"></div>
                         </div>                        
                     </div>
                     <div style="margin-top:25px" >
@@ -153,7 +155,8 @@
                         </div>
                         <div class="row-fluid">
                           <div class="span2"> <button  type="button" class="btn btn-primary" id="newebutton"  data-loading-text="Processing..." onClick="newesubmit()">Submit</button></div>
-                        </div>                     
+                        </div> 
+                        <div class="span4 offset1" id="signupemp"></div>                    
                     </div>
                     <div style="margin-top:25px" >
                     </div>
@@ -197,8 +200,53 @@
 	  else if(window.ActiveXObject) {	// for Internet Explorer 5 or 6
 		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
 	  }
-	
 	  return xmlHttp;
+	}
+	function login(){
+		var loginname=document.getElementById("loginuname").value;
+		var loginpass=document.getElementById("loginpass").value;
+		var logintype=document.getElementById("loginas").value;
+		var data='uname='+loginname+'&pass='+loginpass+'&type='+logintype;
+		var request = get_XmlHttp();
+		request.open("POST","login.php",true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.send(data);
+		request.onreadystatechange = function() {
+			if (request.readyState == 4) {
+		  	document.getElementById("loginstatus").innerHTML = request.responseText;
+			}
+	  	}
+	}
+	function newesubmit(){
+		var empname=document.getElementById("newempName").value;
+		var empage=document.getElementById("newempAge").value;
+		var empdob=document.getElementById("newempDOB").value;	
+		var empaddress=document.getElementById("neweAddress").value;
+		var empuni=document.getElementById("newempUni").value;
+		var empmajor=document.getElementById("newempMajor").value;
+		var empgdate=document.getElementById("newempGDate").value;
+		var empcity=document.getElementById("neweCity").value;
+		var emplookingfor=document.getElementById("lookingfor").value;
+		var empuname=document.getElementById("neweuname").value;
+		var emppass=document.getElementById("newepass").value;
+		var empemail=document.getElementById("neweemail").value;
+		var empinfo=document.getElementById("neweInfo").value;
+		var data='name='+empname+'&age='+empage+'&dob='+empdob+'&address='+empaddress+'&uni='+empuni+'&major='+empmajor+'&gdate='+empgdate+'&city='+empcity+'&lookingfor='+emplookingfor+'&uname='+empuname+'&pass='+emppass+'&email='+empemail+'&info='+empinfo;
+		var totaldepartments=document.getElementById("neweNDept").value;
+		data=data+'&size='+totaldepartments;
+		for (var i=0;i<totaldepartments;i++){
+			var id="depemp"+i;
+			data=data+'&depemp'+i+'='+document.getElementById(id).value;
+		}
+		var request =  get_XmlHttp();
+		request.open("POST", "newemployee.php", true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  	request.send(data);
+	  	request.onreadystatechange = function() {
+			if (request.readyState == 4) {
+		  	document.getElementById("signupemp").innerHTML = request.responseText;
+			}
+	  	}
 	}
 	function newcsubmit(){
 		var companyname=document.getElementById("newcName").value;
@@ -214,10 +262,10 @@
 	  	request.open("POST", "newcompany.php", true);			// set the request
 		
 		var totaldepartments=document.getElementById("newcNDept").value;
-		//data2='&size='+totaldepartments;
+		data1=data1+'&size='+totaldepartments;
 		for (var i=0;i<totaldepartments;i++){
 			var id="depcmp"+i;
-			//data2=data2+'&depcmp'+i+'='+document.getElementById(id).value;
+			data1=data1+'&depcmp'+i+'='+document.getElementById(id).value;
 		}	
 	  	// adds  a header to tell the PHP script to recognize the data as is sent via POST
 	  	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -227,7 +275,7 @@
 	  // If the response is received completely, will be transferred to the HTML tag with tagID
 	  	request.onreadystatechange = function() {
 			if (request.readyState == 4) {
-		  	document.getElementById("newcbutton").innerHTML = request.responseText;
+		  	document.getElementById("result").innerHTML = request.responseText;
 			}
 	  	}
 
