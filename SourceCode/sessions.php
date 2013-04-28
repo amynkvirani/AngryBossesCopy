@@ -1,7 +1,7 @@
 <?php
 
-session_start();
 
+session_start();
 function logged_in(){
 return isset($_SESSION['type']);
 }
@@ -46,7 +46,6 @@ function logout(){
 
 	//2. unset all the session vars
 	$_SESSION = array();
-
 	//3. destroy sesscookie
 	if(isset($_COOKIE[session_name()])){
 	setcookie(session_name(), '', time()-42000, '/');
@@ -54,7 +53,6 @@ function logout(){
 
 	//4. destroy the session
 	session_destroy();
-
 	//redirect_to("");
 	//uncomment above line and add redirect to whatever page you want to in case of redirecting to another page
 
