@@ -106,7 +106,7 @@
 			$result_set = mysql_query($query);
 			confirm_query($result_set);
 			
-			$query = "SELECT `Emp_ID` from employeer where `Cmp_Email`='" .$emailAdd . "'";
+			$query = "SELECT `Cmp_ID` from employeer where `Cmp_Email`='" .$emailAdd . "'";
 			$result_set = mysql_query($query);
 			confirm_query($result_set);
 			
