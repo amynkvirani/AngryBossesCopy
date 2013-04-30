@@ -95,13 +95,13 @@
 			$password = $cPassword;
 			$emailAdd = cEmail;
 			$otherInformation = $cOtherInformation;
-			$companyID = $this->addEmployer();
+			$companyID = $this->addNewEmployer();
 			
 		}
 		
-		function addEmployer()
+		function addNewEmployer()
 		{
-			$query = "INSERT INTO `job_openings` (`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`)
+			$query = "INSERT INTO `employeer` (`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`)
 						VALUES ('$name','$about','$universityName','$password','$emailAdd','$otherInformation')";
 			$result_set = mysql_query($query);
 			confirm_query($result_set);
