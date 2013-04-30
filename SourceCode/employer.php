@@ -31,7 +31,7 @@
 			$departments = $cDepartments;
 			$universityName = $cUniversityName;
 			$password = $cPassword;
-			$email = cEmail;
+			$email = $cEmail;
 			$otherInformation = $cOtherInformation;
 			update();
 		}

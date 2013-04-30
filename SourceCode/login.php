@@ -1,5 +1,6 @@
 <?php
 include('./db.inc.php');
+include('./sessions.php');
 if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['type'])) {
 	#echo ("Login called");
 	$username = $_POST['uname'];
@@ -7,23 +8,29 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['type'])) {
 	$logintype = $_POST['type'];
 	#echo ($logintype);
 	if ($logintype=="employee"){
-		echo ("Logging in as Employee");
+		//echo ("Logging in as Employee");
 		$query1=mysql_query("SELECT `Emp_ID` FROM `employee` WHERE `Emp_UName`='".$username."' AND `Emp_Pass`='".$password."'");
-		if (mysql_fetch_array($query1)){
-			echo ("Valid Login as Employee");
+		
+		if ($id=mysql_fetch_array($query1)){
+			$id=$id['Emp_ID'];
+			createSessionEmployee($id,$username);
+			echo ("true");
 		}
 		else{
-			echo ("Invalid Login as Employee");
+			echo ("false");
 		}
 	}
 	else if ($logintype=="employeer"){
-		echo ("Logging in as Employee");
+		//echo ("Logging in as Employeer");
 		$query1=mysql_query("SELECT `Cmp_ID` FROM `employeer` WHERE `Cmp_UName`='".$username."' AND `Cmp_Pass`='".$password."'");
-		if (mysql_fetch_array($query1)){
-			echo ("Valid Login as Employeer");
+		if ($id=mysql_fetch_array($query1)){
+			$id=$id['Cmp_ID'];
+			createSessionEmployeer($id,$username);
+			echo ("true");
+			header('Location: profile.php');
 		}
 		else{
-			echo ("Invalid Login as Employeer");
+			echo ("false");
 		}	
 	}
 }

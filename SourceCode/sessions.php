@@ -41,7 +41,9 @@ function getEmployerUsername()
 	return $_SESSION['employerUsername'];
 }
 
-
+function getUserType(){
+	return $_SESSION['type'];
+}
 function logout(){ // destroys the current session
 
 	//2. unset all the session vars

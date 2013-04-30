@@ -20,6 +20,9 @@
 	</script>
 </head>
 <body>
+<?php
+	include('./db.inc.php');
+?>
 <div class="container-fluid">
 
 	<div class="row-fluid">
@@ -213,7 +216,18 @@
 		request.send(data);
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
-		  	document.getElementById("loginstatus").innerHTML = request.responseText;
+		  		var state=request.responseText;
+				//document.getElementById("loginstatus").innerHTML=state;
+				if (state=="true"){
+					//$user=new user();
+					//$user->username=loginname;
+					//$user->usertype=logintype;
+					//$user->login();
+					window.location="profile.php";	
+				}
+				else if (state=="false"){
+					document.getElementById("loginstatus").innerHTML="Invalid login credentials";
+				}
 			}
 	  	}
 	}
@@ -313,7 +327,7 @@
 			$opt1="<option value='";
 			$opt2="'>";
 			$opt3="</option>";
-			include('./db.inc.php');
+
 			$list="<select id='depemp'>";
 			$query=mysql_query("SELECT Dept_Name FROM `departments` ORDER BY Dept_Name");
 			//$departments = mysql_fetch_array($query, MYSQL_ASSOC);
