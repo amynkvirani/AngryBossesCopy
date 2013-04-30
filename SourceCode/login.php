@@ -25,9 +25,8 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['type'])) {
 		$query1=mysql_query("SELECT `Cmp_ID` FROM `employeer` WHERE `Cmp_UName`='".$username."' AND `Cmp_Pass`='".$password."'");
 		if ($id=mysql_fetch_array($query1)){
 			$id=$id['Cmp_ID'];
-			createSessionEmployeer($id,$username);
+			createSessionEmployer($id,$username);
 			echo ("true");
-			header('Location: profile.php');
 		}
 		else{
 			echo ("false");

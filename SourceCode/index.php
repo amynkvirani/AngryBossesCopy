@@ -217,7 +217,7 @@
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
 		  		var state=request.responseText;
-				//document.getElementById("loginstatus").innerHTML=state;
+				document.getElementById("loginstatus").innerHTML=state;
 				if (state=="true"){
 					//$user=new user();
 					//$user->username=loginname;

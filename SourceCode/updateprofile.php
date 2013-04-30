@@ -26,4 +26,18 @@ if (isset($_POST['name']) && isset($_POST['age']) && isset($_POST['dob']) && iss
 	#echo ("Record updated successfully");	
 	#echo($name.$age.$dob.$address.$uni.$major.$gdate.$city.$lookingfor.$uname.$pass.$email.$info.$size.$depemp0);
 }
+elseif (isset($_POST['name']) && isset($_POST['about']) && isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['email']) && isset($_POST['info'])) {
+	$name=$_POST['name'];
+	$about=$_POST['about'];
+	$uname=$_POST['uname'];
+	$pass=$_POST['pass'];
+	$email=$_POST['email'];
+	$info=$_POST['info'];
+
+	$query1=mysql_query("UPDATE `employeer` SET `Cmp_Name`='".$name."',`Cmp_About`='".$about."',`Cmp_UName`='".$uname."',`Cmp_Pass`='".$pass."',`Cmp_Email`='".$email."',`Cmp_OtherInfo`='".$info."' WHERE `Cmp_ID`='".getEmployerID()."'");
+	if (!$query1){
+		die('Could not enter data: ' . mysql_error());	
+	}
+	echo json_encode(array("name" => "$name", "about" => "$about", "uname" => "$uname", "pass" => "$pass", "email" => "$email", "info" => "$info"));
+}
 ?>

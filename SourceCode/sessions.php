@@ -27,8 +27,8 @@ function getEmployeeUsername()
 //employer Sessions
 function createSessionEmployer($employerID, $employerUsername)
 {	// creates a session for employer
-	$_SESSION['employerID'] = $employeeID;
-	$_SESSION['employerUsername'] = $employeeUsername;
+	$_SESSION['employerID'] = $employerID;
+	$_SESSION['employerUsername'] = $employerUsername;
 	$_SESSION['type'] = "employer";
 }
 function getEmployerID()
