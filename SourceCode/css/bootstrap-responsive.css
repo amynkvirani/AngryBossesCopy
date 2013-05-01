@@ -240,9 +240,11 @@
     *width: 99.94680851063829%;
   }
   .row-fluid .span11 {
-    width: 91.45299145299145%;
-    *width: 91.39979996362975%;
+   min-width: 250px;
+   width: auto;
+  *width: auto;
   }
+  
   .row-fluid .span10 {
     width: 82.90598290598291%;
     *width: 82.8527914166212%;
@@ -376,8 +378,8 @@
     *margin-left: 11.004728132387708%;
   }
   .row-fluid .offset1:first-child {
-    margin-left: 8.547008547008547%;
-    *margin-left: 8.440625568285142%;
+    margin-left: 1.547008547008547%;
+    *margin-left: 1.440625568285142%;
   }
   input,
   textarea,
@@ -456,6 +458,27 @@
   .row-fluid .thumbnails {
     margin-left: 0;
   }
+}
+.span11 textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input 
+{
+ width: 236px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
