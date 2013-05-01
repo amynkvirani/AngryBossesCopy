@@ -26,7 +26,7 @@
 	<![endif]-->
 </head>
 <body>
-?>
+
 
 <script>
 	var Emp_Name;
@@ -80,7 +80,7 @@
 		$empid=getEmployeeID();
 		$query=mysql_query("SELECT * FROM `employee` WHERE `Emp_ID`='".$empid."'");
 		$info = mysql_fetch_array($query);
-		echo ("
+		echo "
 				Emp_Name='".$info['Emp_Name']."';
 				Emp_Age='".$info['Emp_Age']."';
 				Emp_DOB='".$info['Emp_DOB']."';
@@ -97,13 +97,16 @@
 		}
 		window.onload=viewprofile;
 	</script>
-		");
+		";
 ?>
 	<div class="container-fluid">
 	
 		<div class="row-fluid">
 			<header class="span12 hero-unit ">
-				<h1>Angry Bosses! A Job Portal </h1>
+				<img src = "./img/logo.png">
+				<div class = "headerMenu">
+				Welcome, <?php echo $info['Emp_Name']; ?>
+				</div>
 			</header>
 		</div>
 
@@ -122,29 +125,29 @@
 				<section class="row-fluid">
 					<div class="span11 offset1">
 						<label><b>Employee Name</b></label>
-						<div id="viewname"> </div>
+						<div class = "infoArea" id="viewname"> </div>
 						<label><b>Employee Age</b></label>
-						<div id="viewage"> </div>
+						<div class = "infoArea" id="viewage"> </div>
 						<label><b>Employee DOB</b></label>
-						<div id="viewdob"> </div>
+						<div class = "infoArea" id="viewdob"> </div>
 						<label><b>Employee Address</b></label>
-						<div id="viewaddress"> </div>
+						<div class = "infoArea" id="viewaddress"> </div>
 						<label><b>University Name</b></label>
-						<div id="viewuni"> </div>
+						<div class = "infoArea" id="viewuni"> </div>
 						<label><b>Employee Major</b></label>
-						<div id="viewmajor"> </div>
+						<div class = "infoArea" id="viewmajor"> </div>
 						<label><b>Graduation Date</b></label>
-						<div id="viewgdate"> </div>
+						<div class = "infoArea" id="viewgdate"> </div>
 						<label><b>Preferred City</b></label>
-						<div id="viewcity"> </div>
+						<div class = "infoArea" id="viewcity"> </div>
 						<label><b>Looking for</b></label>
-						<div id="viewlookingfor"> </div>
+						<div class = "infoArea" id="viewlookingfor"> </div>
 						<label><b>User Name</b></label>
-						<div id="viewuname"> </div>
+						<div class = "infoArea" id="viewuname"> </div>
 						<label><b>Email Address</b></label>
-						<div id="viewemail"> </div>
+						<div class = "infoArea" id="viewemail"> </div>
 						<label><b>Other Information</b></label>
-						<div id="viewinfo"> </div>
+						<div class = "infoArea" id="viewinfo"> </div>
 					</div>
 				</section>        
 			</div>
@@ -160,7 +163,7 @@
 								<label><b>Employee DOB</b></label>
 								<input class="input-large" id="empDOB" type="date"  placeholder="Employee DOB">
 								<label><b>Employee Address</b></label>
-								<textarea id="empAddress" placeholder="Employee Address" class="span6" rows="6"></textarea>
+								<textarea id="empAddress" placeholder="Employee Address"  rows="6"></textarea>
 								<label><b>University Name</b></label>
 								<input class="input-xlarge" id="empUni" type="text" placeholder="University Name" >
 								<label><b>Employee Major</b></label>
@@ -170,7 +173,7 @@
 								<label><b>Preferred City</b></label>
 								<input class="input-medium" id="empCity" type="text" placeholder="Preferred City" >
 								<label><b>Looking for</b></label>
-								<select class="span1" required id="empLookingFor">
+								<select required id="empLookingFor">
 									<option value="Internship">Internship</option>
 									<option value="Job">Job</option>
 								</select>
@@ -181,14 +184,16 @@
 								<label><b>Email Address</b></label>
 								<input class="input-large" id="empEmail" type="email" placeholder="Email Address">
 								<label><b>Other Information</b></label>
-								<textarea id="empInfo" placeholder="Other Information" rows="6" class="span6"></textarea>
+								<textarea id="empInfo" placeholder="Other Information" rows="6" ></textarea>
 							</div>
 							<div class="row-fluid">
 							  <div class="span2"> <button  type="button" class="btn btn-primary" id="newebutton"  data-loading-text="Processing..." onClick="updateSubmit()">Update</button></div>
-							  <div class="span3 offset2" id="updatestatus"></div>
+							  
 							</div>                    
 						</div>                	
+						<div class="statusMessage" id="updatestatus"></div>
 					</div>
+					
 				</section>        
 			</div>
 			<div class="tab-pane active" id="searchforjobs">
@@ -317,7 +322,9 @@
 			//window.location.reload(true);
 	}
 </script>
-
+<div class = "span12 hero-unit footer">
+AngryBosses 2013. All Rights Reserved.
+</div>
 </body>
 </html>
 <?php
@@ -391,7 +398,10 @@ elseif (getUserType()=="employer"){
 	
 		<div class="row-fluid">
 			<header class="span12 hero-unit ">
-				<h1>Angry Bosses! A Job Portal </h1>
+				<img src = "./img/logo.png">
+				<div class = "headerMenu">
+				Welcome, <?php echo $info['Cmp_Name']; ?>
+				</div>
 			</header>
 		</div>
 
@@ -410,15 +420,15 @@ elseif (getUserType()=="employer"){
 			<section class="row-fluid">
 				<div class="span11 offset1">
 	            	<label><b>Company Name</b></label>
-	            	<div id="viewname"></div>
+	            	<div class = "infoArea" id="viewname"></div>
 	                <label><b>About</b></label>
-	                <div id="viewabout"></div>
+	                <div class = "infoArea" id="viewabout"></div>
 	                <label><b>User Name</b></label>
-	                <div id="viewuname"></div>
+	                <div class = "infoArea" id="viewuname"></div>
 	                <label><b>Email Address</b></label>
-	                <div id="viewemail"></div>
+	                <div class = "infoArea" id="viewemail"></div>
 	                <label><b>Other Information</b></label>
-	                <div id="viewinfo"></div>
+	                <div class = "infoArea" id="viewinfo"></div>
 	            </div>
 			</section>        
 		</div>
@@ -430,7 +440,7 @@ elseif (getUserType()=="employer"){
                         	<label><b>Company Name</b></label>
                             <input class="input-xlarge" id="cmpName" type="text"  placeholder="Comany Name">
                             <label><b>About</b></label>
-                            <textarea id="cmpAbout" placeholder="About" class="span6" rows="6"></textarea>
+                            <textarea id="cmpAbout" placeholder="About" rows="6"></textarea>
                             <label><b>User Name</b></label>
                             <input class="input-medium" id="cmpUName" type="text" placeholder="User Name">
                             <label><b>Password</b></label>
@@ -438,15 +448,16 @@ elseif (getUserType()=="employer"){
                             <label><b>Email Address</b></label>
                             <input class="input-large" id="cmpEmail" type="email" placeholder="Email Address">
                             <label><b>Other Information</b></label>
-                            <textarea id="cmpInfo" placeholder="Other Information" rows="6" class="span6"></textarea>
+                            <textarea id="cmpInfo" placeholder="Other Information" rows="6"></textarea>
                         </div>
                         <div class="row-fluid">
                         	<div class="span2"> <button  type="button" class="btn btn-primary" id="newcbutton"  data-loading-text="Processing..." onClick="updateSubmit()">Update</button></div>
-                            <div class="span3 offset2" id="updatestatus"></div>
+                           
                         </div>                        
                     </div>
-               	
+               	<div class="statusMessage" id="updatestatus"></div>
 				</div>
+				 
 			</section>        
 		</div>
 		<div class="tab-pane active" id="searchforjobs">
@@ -554,6 +565,9 @@ elseif (getUserType()=="employer"){
 			//window.location.reload(true);
 	}
 </script>
+<div class = "span12 hero-unit footer">
+AngryBosses 2013. All Rights Reserved.
+</div>
 </body>
 </html>
 <?php
