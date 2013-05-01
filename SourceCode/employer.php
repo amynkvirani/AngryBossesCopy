@@ -1,6 +1,5 @@
 <?php
 	include('./db.inc.php');
-	include('./sessions.php');
 	Class Employer{
 
 		public $companyID;
@@ -52,7 +51,9 @@
 				$UName = $results['Cmp_UName'];
 				$Cmp_Email = $results['Cmp_Email'];
 				$otherInformation = $results['Cmp_OtherInfo'];
+				$companyID=$id;
 			}
+			$companyID=$id;
 		}
 
 
