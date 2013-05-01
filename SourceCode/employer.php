@@ -8,7 +8,7 @@
 		public $departments;
 		public $UName;
 		public $password;
-		public $email;
+		public $emailAdd;
 		public $otherInformation;
 		
 		// please double check that i used employer instead of employee
@@ -60,7 +60,7 @@
 		{
 			$query = "SELECT * FROM `dept_emp` WHERE `Dept_ID` = '".$id."'";
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//confim_query($result_set);
 			
 			$resultsArray=array();
 			
@@ -89,27 +89,27 @@
 		
 		function addEmployer($cName,$cAbout,$cUName,$cPassword,$cEmail,$cOtherInformation)
 		{	// adds a new employer to the system, and sets the current employer object equal to the newly added employer ...
-			$name = $cName;
-			$about = $cAbout;
+			$this->name = $cName;
+			$this->about = $cAbout;
 			//$departments = $cDepartments;
-			$UName = $cUName;
-			$password = $cPassword;
-			$emailAdd = $cEmail;
-			$otherInformation = $cOtherInformation;
-			$companyID = $this->addNewEmployer();
+			$this->UName = $cUName;
+			$this->password = $cPassword;
+			$this->emailAdd = $cEmail;
+			$this->otherInformation = $cOtherInformation;
+			$this->companyID = $this->addNewEmployer();
 			
 		}
 		
 		function addNewEmployer()
 		{
 			$query = "INSERT INTO `employeer` (`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`)
-						VALUES ('$name','$about','$UName','$password','$emailAdd','$otherInformation')";
+						VALUES ('$this->name','$this->about','$this->UName','$this->password','$this->emailAdd','$this->otherInformation')";
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			////confim_query($result_set);
 			
-			$query = "SELECT `Cmp_ID` from employeer where `Cmp_Email`='" .$emailAdd . "'";
+			$query = "SELECT `Cmp_ID` from employeer where `Cmp_Email`='" .$this->emailAdd . "'";
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			////confim_query($result_set);
 			
 			while($allResults = mysql_fetch_array($result_set))
 			{
@@ -123,16 +123,16 @@
 			
 			SET
 			
-			`Cmp_Name` = '$name',
-			`Cmp_About` = '$about',
-			`Cmp_UName` = '$UName',
-			`Cmp_Email` = '$emailAdd',
-			`Cmp_OtherInfo` = '$otherInformation'
+			`Cmp_Name` = '$this->name',
+			`Cmp_About` = '$this->about',
+			`Cmp_UName` = '$this->UName',
+			`Cmp_Email` = '$this->emailAdd',
+			`Cmp_OtherInfo` = '$this->otherInformation'
 			WHERE
-			`Cmp_ID` = '$companyID'";
+			`Cmp_ID` = '$this->companyID'";
 
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//confim_query($result_set);
 		}
 		
 
@@ -144,33 +144,33 @@
 		
 		function getAllMyOpenings()
 		{
-			$query = "SELECT * FROM job_openings WHERE Cmp_ID = " . $companyID;
+			$query = "SELECT * FROM job_openings WHERE Cmp_ID = '$this->companyID'";
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//confim_query($result_set);
 			return $result_set; // use mysql_fetch_array($result_set) to fetch results from here
 		}
 		
 		function getJobOpeningInfo($id)
 		{
-			$query = "SELECT * FROM job_openings WHERE Job_ID = "  . $id;
+			$query = "SELECT * FROM job_openings WHERE Job_ID = '$id'";
 			$result_set = mysql_query($query); 
-			confirm_query($result_set);
+			//confim_query($result_set);
 			return $result_set; // use mysql_fetch_array($result_set) to fetch return results..
 		}
 		
 		function getJobApplications($jobID)
 		{
-			$query = "SELECT * FROM applications WHERE Job_ID = ". $jobID;
+			$query = "SELECT * FROM applications WHERE Job_ID = '$jobID'";
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//confim_query($result_set);
 			return $result_set; // use mysql_fetch_array($result_set) to fetch return results..
 		}
 		
 		function getApplication($applicationID)
 		{
-			$query = "SELECT * FROM applications WHERE App_ID = " . $applicationID;
+			$query = "SELECT * FROM applications WHERE App_ID = '$applicationID'";
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//confim_query($result_set);
 			return $result_set; // use mysql_fetch_array($result_set) to fetch return results..
 		}
 		
@@ -178,7 +178,7 @@
 		{
 			$query = "INSERT INTO job_openings (Cmp_ID, Job_Location, Job_Requirements, Job_Open, Job_ODate, Job_CDate,
 			Job_Duration, Job_Type,Job_Salary, Job_OtherInfo)
-						VALUES ($companyID, $location, $requirements,$open,$openDate,$closeDate,$duration,$type,$salary,$otherInfo)";
+						VALUES ('$this->companyID', '$location', '$requirements','$open','$openDate','$closeDate','$duration','$type','$salary','$otherInfo')";
 			$result_set = mysql_query($query);
 			return $result_set; // use mysql_fetch_array($result_set) to fetch return results..
 		}
@@ -190,21 +190,21 @@
 			
 			SET
 			
-			Cmp_ID = $companyID,
-			Job_Location = $location,
-			Job_Requirements= $requirements,
-			Job_Open = $open,
-			Job_ODate = $openDate,
-			Job_CDate = $closeDate,
-			Job_Duration = $duration,
-			Job_Type = $type,
-			Job_Salary = $salary,
-			Job_OtherInfo = $otherInfo
+			Cmp_ID = '$this->companyID',
+			Job_Location = '$location',
+			Job_Requirements= '$requirements',
+			Job_Open = '$open',
+			Job_ODate = '$openDate',
+			Job_CDate = '$closeDate',
+			Job_Duration = '$duration',
+			Job_Type = '$type',
+			Job_Salary = '$salary',
+			Job_OtherInfo = '$otherInfo'
 			WHERE
-			Job_ID = $jobID";
+			Job_ID = '$jobID'";
 			
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//confim_query($result_set);
 			
 		}
 
