@@ -89,32 +89,32 @@
 		
 		function addEmployer($cName,$cAbout,$cUName,$cPassword,$cEmail,$cOtherInformation)
 		{	// adds a new employer to the system, and sets the current employer object equal to the newly added employer ...
-			$name = $cName;
-			$about = $cAbout;
+			$this->name = $cName;
+			$this->about = $cAbout;
 			//$departments = $cDepartments;
-			$UName = $cUName;
-			$password = $cPassword;
-			$emailAdd = $cEmail;
-			$otherInformation = $cOtherInformation;
-			$companyID = $this->addNewEmployer();
+			$this->UName = $cUName;
+			$this->password = $cPassword;
+			$this->emailAdd = $cEmail;
+			$this->otherInformation = $cOtherInformation;
+			$this->companyID = $this->addNewEmployer();
 			
 		}
 		
 		function addNewEmployer()
 		{
-			$query = "INSERT INTO `employeer` (`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`)
-						VALUES ('$name','$about','$UName','$password','$emailAdd','$otherInformation')";
+			$query="INSERT INTO `employeer`(`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`) VALUES ($this->name,$this->about,$this->UName,$this->password,$this->email,$this->otherInformation)";
+			//$query = "INSERT INTO `employeer` (`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`) VALUES ('$name','$about','$UName','$password','$emailAdd','$otherInformation')";
 			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//confirm_query($result_set);
 			
-			$query = "SELECT `Cmp_ID` from employeer where `Cmp_Email`='" .$emailAdd . "'";
-			$result_set = mysql_query($query);
-			confirm_query($result_set);
+			//$query = "SELECT `Cmp_ID` from employeer where `Cmp_Email`='" .$this->email . "'";
+			//$result_set = mysql_query($query);
+			//confirm_query($result_set);
 			
-			while($allResults = mysql_fetch_array($result_set))
-			{
-				return $allResults['Cmp_ID'];
-			}
+			//while($allResults = mysql_fetch_array($result_set))
+			//{
+			//	return $allResults['Cmp_ID'];
+			//}
 		}
 		
 		function updateEmployer()

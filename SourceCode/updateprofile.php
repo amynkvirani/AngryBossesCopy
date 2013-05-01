@@ -43,6 +43,6 @@ elseif (isset($_POST['name']) && isset($_POST['about']) && isset($_POST['uname']
 //	if (!$query1){
 //		die('Could not enter data: ' . mysql_error());	
 //	}
-	echo json_encode(array("name" => "$name", "about" => "$about", "uname" => "$uname", "pass" => "$pass", "email" => "$email", "info" => "$info"));
+	echo json_encode(array("cmpname" => "$name", "about" => "$about", "uname" => "$uname", "pass" => "$pass", "email" => "$email", "otherinfo" => "$info"));
 }
 ?>

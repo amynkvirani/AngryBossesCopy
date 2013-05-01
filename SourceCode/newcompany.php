@@ -1,9 +1,8 @@
 <?php
 
 include('./db.inc.php');
-include('./employer.php')
+include('./employer.php');
 
-// if data are received via POST, with index of 'test'
 if (isset($_POST['compname']) && isset($_POST['abt']) && isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['emailid']) && isset($_POST['info'])) {
     $compname = $_POST['compname'];             // get data
 	$abt = $_POST['abt'];
@@ -35,7 +34,8 @@ if (isset($_POST['compname']) && isset($_POST['abt']) && isset($_POST['uname']) 
 		$dep_ID=$dep_ID['Dept_ID'];
 		$query4=mysql_query("INSERT INTO `dept_cmp`(`Dept_ID`, `Cmp_ID`) VALUES ('$dep_ID','$comp_ID')");
 	}
-	echo ($comp_ID);
+	echo ("true");
+	//echo ($comp_ID);
 	//echo $compname.$abt.$uname.$pass.$emailid.$info.$numdept.$alldept;
 }
 ?> 

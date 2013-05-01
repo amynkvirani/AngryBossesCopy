@@ -454,12 +454,12 @@ elseif (getUserType()=="employer"){
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
 				$.getJSON("updateprofile.php", function(data) {
-					document.getElementById("cmpName").value=data.name;
+					document.getElementById("cmpName").value=data.cmpname;
 					document.getElementById("cmpAbout").value=data.about;
 					document.getElementById("cmpUName").value=data.uname;
 					document.getElementById("cmpPass").value=data.pass;
 					document.getElementById("cmpEmail").value=data.email;
-					document.getElementById("cmpInfo").value=data.info;				
+					document.getElementById("cmpInfo").value=data.otherinfo;				
 				});
 			document.getElementById("updatestatus").innerHTML = "Record updated successfully";
 			}
