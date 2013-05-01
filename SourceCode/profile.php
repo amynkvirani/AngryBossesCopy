@@ -451,6 +451,7 @@ elseif (getUserType()=="employer"){
 		request.open("POST", "updateprofile.php", true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		request.send(data);
+		document.getElementById("updatestatus").innerHTML = data;
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
 				$.getJSON("updateprofile.php", function(data) {
@@ -461,11 +462,11 @@ elseif (getUserType()=="employer"){
 					document.getElementById("cmpEmail").value=data.email;
 					document.getElementById("cmpInfo").value=data.otherinfo;				
 				});
-			document.getElementById("updatestatus").innerHTML = "Record updated successfully";
+			document.getElementById("updatestatus").innerHTML = request.responseText;
 			}
 		}
 			//updateprofile();
-			window.location.reload(true);
+			//window.location.reload(true);
 	}
 </script>
 <?php

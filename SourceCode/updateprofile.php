@@ -1,6 +1,7 @@
 <?php
 include('./db.inc.php');
 include('./sessions.php');
+include('./employer.php');
 echo ("request received");
 if (isset($_POST['name']) && isset($_POST['age']) && isset($_POST['dob']) && isset($_POST['address']) && isset($_POST['uni']) && isset($_POST['major']) && isset($_POST['gdate']) && isset($_POST['city']) && isset($_POST['lookingfor']) && isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['email']) && isset($_POST['info'])) {
 	$name=$_POST['name'];
@@ -43,6 +44,7 @@ elseif (isset($_POST['name']) && isset($_POST['about']) && isset($_POST['uname']
 //	if (!$query1){
 //		die('Could not enter data: ' . mysql_error());	
 //	}
-	echo json_encode(array("cmpname" => "$name", "about" => "$about", "uname" => "$uname", "pass" => "$pass", "email" => "$email", "otherinfo" => "$info"));
+	echo ("true");
+	//echo json_encode(array("name" => "$name", "about" => "$about", "uname" => "$uname", "pass" => "$pass", "email" => "$email", "otherinfo" => "$info"));
 }
 ?>
