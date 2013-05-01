@@ -1,5 +1,6 @@
 <?php
 	include('./db.inc.php');
+	include('./sessions.php');
 	Class Employer{
 
 		public $companyID;
@@ -42,7 +43,7 @@
 		function constructFromDB($id)
 		{
 			//enter SQL statement to go through db and update all
-			$query = "SELECT * FROM employeer WHERE Cmp_ID = " . $id;
+			$query = "SELECT * FROM employeer WHERE Cmp_ID = '" . $id."'";
 			$result_set = mysql_query($query);
 			while($results = mysql_fetch_array($result_set))
 			{
