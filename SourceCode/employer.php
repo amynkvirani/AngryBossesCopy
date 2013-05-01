@@ -57,9 +57,15 @@
 
 
 
-		function searchEmployee($id) // takes in department ID and returns employees belonging to the department
+		function searchEmployee($deptID) // takes in department ID and returns employees belonging to the department
 		{
-			$query = "SELECT * FROM `dept_emp` WHERE `Dept_ID` = '".$id."'";
+			$query = "SELECT * FROM `departments` WHERE `Dept_Name` = '$deptName'";
+			$result_set = mysql_query($query);
+			$result = mysql_fetch_array($result_set);
+			
+			$deptID = $result['Dept_ID'];
+			
+			$query = "SELECT * FROM `dept_emp` WHERE `Dept_ID` = '".$deptID."'";
 			$result_set = mysql_query($query);
 			//confim_query($result_set);
 
@@ -149,7 +155,14 @@
 			$query = "SELECT * FROM job_openings WHERE Cmp_ID = '$this->companyID'";
 			$result_set = mysql_query($query);
 			//confim_query($result_set);
-			return $result_set; // use mysql_fetch_array($result_set) to fetch results from here
+			
+				$resultsArray=array();
+
+			while($allResults = mysql_fetch_array($result_set))
+			{
+				$resultsArray[] = $allResults['Job_ID'];
+			}
+			return $resultsArray; // use while loop to traverse the return array..returns single array.
 		}
 
 		function getJobOpeningInfo($id)
@@ -162,10 +175,18 @@
 
 		function getJobApplications($jobID)
 		{
+		
 			$query = "SELECT * FROM applications WHERE Job_ID = '$jobID'";
 			$result_set = mysql_query($query);
 			//confim_query($result_set);
-			return $result_set; // use mysql_fetch_array($result_set) to fetch return results..
+			
+			$resultsArray=array();
+
+			while($allResults = mysql_fetch_array($result_set))
+			{
+				$resultsArray[] = $allResults['Emp_ID'];
+			}
+			return $resultsArray; // returns all employer id's
 		}
 
 		function getApplication($applicationID)
