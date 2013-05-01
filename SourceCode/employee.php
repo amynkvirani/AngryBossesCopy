@@ -173,9 +173,15 @@ include('./db.inc.php');
 			return $result_set; // use mysql_fetch_array($result_set) to fetch return results..
 		}
 		
-			function searchJobs($id) // takes in department ID and returns jobs related to that
+			function searchJobs($deptName) // takes in department names and returns jobs related to that
 		{ // to be edited
-			$query = "SELECT * FROM `job_openings` WHERE `Dept_ID` = '".$id."'";
+			$query = "SELECT * FROM `departments` WHERE `Dept_Name` = '$deptName'";
+			$result_set = mysql_query($query);
+			$result = mysql_fetch_array($result_set);
+			
+			$deptID = $result['Dept_ID'];
+		
+			$query = "SELECT * FROM `job_openings` WHERE `Dept_ID` = '".$deptID."'";
 			$result_set = mysql_query($query);
 			
 			
@@ -191,9 +197,15 @@ include('./db.inc.php');
 									//use $resultsArray[0]..[1]..[2].. etc. to access values
 		}
 		
-			function searchCompanies($deptID)
+			function searchCompanies($deptName)
 			{
-				$query = "SELECT * FROM `dept_cmp` WHERE `Dept_ID` = '".$id."'";
+			
+				$query = "SELECT * FROM `departments` WHERE `Dept_Name` = '$deptName'";
+				$result_set = mysql_query($query);
+				$result = mysql_fetch_array($result_set);
+			
+				$deptID = $result['Dept_ID'];
+				$query = "SELECT * FROM `dept_cmp` WHERE `Dept_ID` = '".$deptID."'";
 				$result_set = mysql_query($query);
 				
 				
