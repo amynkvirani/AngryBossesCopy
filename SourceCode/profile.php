@@ -26,33 +26,53 @@
 	<![endif]-->
 </head>
 <body>
-<?php
-	echo ("<script> function updateprofile(){
-		var usertype=getUserType();
-		var userid=getID();
-		if (usertype=='employee'){"); ?>
-<?php
-		$empid=getEmployeeID();
-		$query=mysql_query("SELECT * FROM `employee` WHERE `Emp_ID`='".$empid."'");
-		$info = mysql_fetch_array($query);
-		echo ("document.getElementById('empName').value='".$info['Emp_Name']."';
-				   document.getElementById('empAge').value='".$info['Emp_Age']."';
-				   document.getElementById('empDOB').value='".$info['Emp_DOB']."';
-				   document.getElementById('empAddress').value='".$info['Emp_Address']."';
-				   document.getElementById('empUni').value='".$info['Emp_UniName']."';
-				   document.getElementById('empMajor').value='".$info['Emp_Major']."';
-				   document.getElementById('empCity').value='".$info['Emp_PrefCity']."';
-				   document.getElementById('empGDate').value='".$info['Emp_GradDate']."';
-				   document.getElementById('empLookingFor').value='".$info['Emp_InternJob']."';
-				   document.getElementById('empUName').value='".$info['Emp_UName']."';
-				   document.getElementById('empPass').value='".$info['Emp_Pass']."';
-				   document.getElementById('empEmail').value='".$info['Emp_Email']."';
-				   document.getElementById('empInfo').value='".$info['Emp_OtherInfo']."';
-		} 
-	}
-	</script>
-		"); 
 ?>
+
+<script>
+	var Emp_Name;
+	var Emp_Age;
+	var Emp_DOB;
+	var Emp_Address;
+	var Emp_Major;
+	var Emp_GradDate;
+	var Emp_UniName;
+	var Emp_InternJob;
+	var Emp_PrefCity;
+	var Emp_UName;
+	var Emp_Pass;
+	var Emp_Email;
+	var Emp_OtherInfo;
+		function setviewvalues(){
+				   document.getElementById('viewname').innerHTML=Emp_Name;
+				   document.getElementById('viewage').innerHTML=Emp_Age;
+				   document.getElementById('viewdob').innerHTML=Emp_DOB;
+				   document.getElementById('viewaddress').innerHTML=Emp_Address;
+				   document.getElementById('viewuni').innerHTML=Emp_UniName;
+				   document.getElementById('viewmajor').innerHTML=Emp_Major;
+				   document.getElementById('viewcity').innerHTML=Emp_PrefCity;
+				   document.getElementById('viewgdate').innerHTML=Emp_GradDate;
+				   document.getElementById('viewlookingfor').innerHTML=Emp_InternJob;
+				   document.getElementById('viewuname').innerHTML=Emp_UName;
+				   document.getElementById('viewemail').innerHTML=Emp_Email;
+				   document.getElementById('viewinfo').innerHTML=Emp_OtherInfo;
+				}
+		function seteditvalues(){
+				   document.getElementById('empName').value=Emp_Name;
+				   document.getElementById('empAge').value=Emp_Age;
+				   document.getElementById('empDOB').value=Emp_DOB;
+				   document.getElementById('empAddress').value=Emp_Address;
+				   document.getElementById('empUni').value=Emp_UniName;
+				   document.getElementById('empMajor').value=Emp_Major;
+				   document.getElementById('empCity').value=Emp_Major;
+				   document.getElementById('empGDate').value=Emp_GradDate;
+				   document.getElementById('empLookingFor').value=Emp_InternJob;
+				   document.getElementById('empUName').value=Emp_UName;
+				   document.getElementById('empPass').value=Emp_Pass;
+				   document.getElementById('empEmail').value=Emp_Email;
+				   document.getElementById('empInfo').value=Emp_OtherInfo;
+
+		}
+</script>
 <?php
 	echo ("<script> function viewprofile(){
 		var userid=getID();"); ?>
@@ -60,24 +80,25 @@
 		$empid=getEmployeeID();
 		$query=mysql_query("SELECT * FROM `employee` WHERE `Emp_ID`='".$empid."'");
 		$info = mysql_fetch_array($query);
-		echo ("document.getElementById('viewname').innerHTML='".$info['Emp_Name']."';
-				   document.getElementById('viewage').innerHTML='".$info['Emp_Age']."';
-				   document.getElementById('viewdob').innerHTML='".$info['Emp_DOB']."';
-				   document.getElementById('viewaddress').innerHTML='".$info['Emp_Address']."';
-				   document.getElementById('viewuni').innerHTML='".$info['Emp_UniName']."';
-				   document.getElementById('viewmajor').innerHTML='".$info['Emp_Major']."';
-				   document.getElementById('viewcity').innerHTML='".$info['Emp_PrefCity']."';
-				   document.getElementById('viewgdate').innerHTML='".$info['Emp_GradDate']."';
-				   document.getElementById('viewlookingfor').innerHTML='".$info['Emp_InternJob']."';
-				   document.getElementById('viewuname').innerHTML='".$info['Emp_UName']."';
-				   document.getElementById('viewemail').innerHTML='".$info['Emp_Email']."';
-				   document.getElementById('viewinfo').innerHTML='".$info['Emp_OtherInfo']."';
+		echo ("
+				Emp_Name='".$info['Emp_Name']."';
+				Emp_Age='".$info['Emp_Age']."';
+				Emp_DOB='".$info['Emp_DOB']."';
+				Emp_Address='".$info['Emp_Address']."';
+				Emp_UniName='".$info['Emp_UniName']."';
+				Emp_Major='".$info['Emp_Major']."';
+				Emp_GradDate='".$info['Emp_GradDate']."';
+				Emp_InternJob='".$info['Emp_InternJob']."';
+				Emp_PrefCity='".$info['Emp_PrefCity']."';
+				Emp_UName='".$info['Emp_UName']."';
+				Emp_Email='".$info['Emp_Email']."';
+				Emp_OtherInfo='".$info['Emp_OtherInfo']."';
+				setviewvalues();
 		}
 		window.onload=viewprofile;
 	</script>
 		");
 ?>
-
 	<div class="container-fluid">
 	
 		<div class="row-fluid">
@@ -88,8 +109,8 @@
 
 		<div class="row-fluid">
 			<ul class=" nav nav-tabs" id="profiletabs">
-					<li class="active"><a href="#myprofile" data-toggle="tab" onclick="viewprofile()" >My Profile</a></li>
-					<li><a href="#editprofile" data-toggle="tab" onclick="updateprofile()" >Edit Profile</a></li>
+					<li class="active"><a href="#myprofile" data-toggle="tab" onclick="setviewvalues()" >My Profile</a></li>
+					<li><a href="#editprofile" data-toggle="tab" onclick="seteditvalues()" >Edit Profile</a></li>
 					<li><a href="#searchforjobs" data-toggle="tab" onclick="searchdept()">Search for Jobs</a></li>
 					<li><a href="#searchforcomp" data-toggle="tab" onclick="searchcmp()">Search for Companies</a></li>
 					<li><a href="#logout" data-toggle="tab" onclick="logoutuser()" >Logout</a></li>
@@ -191,7 +212,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/spin.js"></script>
 <script>
-	
 	function get_XmlHttp() {
 	  // create the variable that will contain the instance of the XMLHttpRequest object (initially with null value)
 	  var xmlHttp = null;
@@ -228,16 +248,26 @@
 	function getUserType(){
 		return <?php echo ("'".getUserType()."'"); ?>;	
 	}
-	function viewprofile(){
-		document.getElementById("name").innerHTML=<?php echo ("'".getEmployeeUsername()."'"); ?>;
-		//document.getElementById("employeerform").style.display="none";
-		//document.getElementById("employeeform").style.display="block";
-	}
 	function searchdept(){
 
 	}
 	function searchcmp(){
 
+	}
+	function setvalues(name,age,dob,address,uni,major,city,gdate,lookingfor,uname,pass,email,info){
+		Emp_Name=name;
+		Emp_Age=age;
+		Emp_DOB=dob;
+		Emp_Address=address;
+		Emp_Major=major;
+		Emp_GradDate=gdate;
+		Emp_UniName=uni;
+		Emp_InternJob=lookingfor;
+		Emp_PrefCity=city;
+		Emp_UName=uname;
+		Emp_Pass=pass;
+		Emp_Email=email;
+		Emp_OtherInfo=info;
 	}
 	function updateSubmit(){
 		var empname=document.getElementById("empName").value;
@@ -273,13 +303,18 @@
 				   document.getElementById('empUName').value=data.uname;
 				   document.getElementById('empPass').value=data.pass;
 				   document.getElementById('empEmail').value=data.email;
-				   document.getElementById('empInfo').value=data.info;				
+				   document.getElementById('empInfo').value=data.info;
+
+				 //  		
 				});
+				   setvalues(empname,empage,empdob,empaddress,empuni,empmajor,empcity,empgdate,emplookingfor,empuname,emppass,empemail,empinfo);
+				   setviewvalues();
+				   seteditvalues();		
 			document.getElementById("updatestatus").innerHTML = "Record updated successfully";
 			}
 		}
 			//updateprofile();
-			window.location.reload(true);
+			//window.location.reload(true);
 	}
 </script>
 
@@ -309,6 +344,49 @@ elseif (getUserType()=="employer"){
 	<![endif]-->
 </head>
 <body>
+<script>
+	var Cmp_Name;
+	var Cmp_About;
+	var Cmp_UName;
+	var Cmp_Pass;
+	var Cmp_Email;
+	var Cmp_OtherInfo;
+		function setviewvalues(){
+				   document.getElementById('viewname').innerHTML=Cmp_Name;
+				   document.getElementById('viewabout').innerHTML=Cmp_About;
+				   document.getElementById('viewuname').innerHTML=Cmp_UName;
+				   document.getElementById('viewemail').innerHTML=Cmp_Email;
+				   document.getElementById('viewinfo').innerHTML=Cmp_OtherInfo;
+				}
+		function seteditvalues(){
+				   document.getElementById('cmpName').value=Cmp_Name;
+				   document.getElementById('cmpAbout').value=Cmp_About;
+				   document.getElementById('cmpUName').value=Cmp_UName;
+				   document.getElementById('cmpPass').value=Cmp_Pass;
+				   document.getElementById('cmpEmail').value=Cmp_Email;
+				   document.getElementById('cmpInfo').value=Cmp_OtherInfo;
+
+		}
+</script>
+<?php
+	echo ("<script> function viewprofile(){
+		var userid=getID();"); ?>
+	<?php 
+		$cmpid=getEmployerID();
+		$query=mysql_query("SELECT * FROM `employeer` WHERE `Cmp_ID`='".$cmpid."'");
+		$info = mysql_fetch_array($query);
+		echo ("
+				   Cmp_Name='".$info['Cmp_Name']."';
+				   Cmp_About='".$info['Cmp_About']."';
+				   Cmp_UName='".$info['Cmp_UName']."';
+				   Cmp_Email='".$info['Cmp_Pass']."';
+				   Cmp_OtherInfo='".$info['Cmp_OtherInfo']."';
+				   setviewvalues();
+		}
+		window.onload=viewprofile;
+	</script>
+		");
+?>
 	<div class="container-fluid">
 	
 		<div class="row-fluid">
@@ -319,8 +397,8 @@ elseif (getUserType()=="employer"){
 
 	<div class="row-fluid">
 		<ul class=" nav nav-tabs" id="profiletabs">
-				<li class="active"><a href="#myprofile" data-toggle="tab" onclick="viewprofile()" >My Profile</a></li>
-				<li><a href="#editprofile" data-toggle="tab" onclick="updateprofile()" >Edit Profile</a></li>
+				<li class="active"><a href="#myprofile" data-toggle="tab" onclick="setviewvalues()" >My Profile</a></li>
+				<li><a href="#editprofile" data-toggle="tab" onclick="seteditvalues()" >Edit Profile</a></li>
 				<li><a href="#searchforjobs" data-toggle="tab" onclick="searchdept()">Search for Jobs</a></li>
 				<li><a href="#searchforcomp" data-toggle="tab" onclick="searchcmp()">Search for Companies</a></li>
 				<li><a href="#logout" data-toggle="tab" onclick="logoutuser()" >Logout</a></li>
@@ -429,15 +507,19 @@ elseif (getUserType()=="employer"){
 	function getUserType(){
 		return <?php echo ("'".getUserType()."'"); ?>;	
 	}
-	function viewprofile(){
-		document.getElementById("employeerform").style.display="none";
-		document.getElementById("employeeform").style.display="block";
-	}
 	function searchdept(){
 
 	}
 	function searchcmp(){
 
+	}
+	function setvalues(name,about,uname,pass,email,info){
+		Cmp_Name=name;
+		Cmp_About=about;
+		Cmp_UName=uname;
+		Cmp_Pass=pass;
+		Cmp_Email=email;
+		Cmp_OtherInfo=info;
 	}
 	function updateSubmit(){
 		var cmpname=document.getElementById("cmpName").value;
@@ -462,52 +544,16 @@ elseif (getUserType()=="employer"){
 					document.getElementById("cmpEmail").value=data.email;
 					document.getElementById("cmpInfo").value=data.otherinfo;				
 				});
-			document.getElementById("updatestatus").innerHTML = request.responseText;
+				setvalues(cmpname,cmpabout,cmpuname,cmppass,cmpemail,cmpinfo);
+				setviewvalues();
+				seteditvalues();
+				document.getElementById("updatestatus").innerHTML = "Record updated successfully";
 			}
 		}
 			//updateprofile();
 			//window.location.reload(true);
 	}
 </script>
-<?php
-	echo ("<script> 
-		function updateprofile(){
-			var usertype=getUserType();
-			if (usertype=='employer'){
-				var userid=getID();"); ?>
-		<?php	
-			$query=mysql_query("SELECT * FROM `employeer` WHERE `Cmp_ID`='".getEmployerID()."'");
-			$info = mysql_fetch_array($query, MYSQL_ASSOC);
-		?>
-<?php
-	echo ("document.getElementById('cmpName').value='".$info['Cmp_Name']."';
-		   document.getElementById('cmpAbout').value='".$info['Cmp_About']."';
-		   document.getElementById('cmpUName').value='".$info['Cmp_UName']."';
-		   document.getElementById('cmpPass').value='".$info['Cmp_Pass']."';
-		   document.getElementById('cmpEmail').value='".$info['Cmp_Email']."';
-		   document.getElementById('cmpInfo').value='".$info['Cmp_OtherInfo']."';
-		}
-	}
-</script>
-");
-?>
-<?php
-	echo ("<script> function viewprofile(){
-		var userid=getID();"); ?>
-	<?php 
-		$cmpid=getEmployerID();
-		$query=mysql_query("SELECT * FROM `employeer` WHERE `Cmp_ID`='".$cmpid."'");
-		$info = mysql_fetch_array($query);
-		echo ("document.getElementById('viewname').innerHTML='".$info['Cmp_Name']."';
-				   document.getElementById('viewabout').innerHTML='".$info['Cmp_About']."';
-				   document.getElementById('viewuname').innerHTML='".$info['Cmp_UName']."';
-				   document.getElementById('viewemail').innerHTML='".$info['Cmp_Email']."';
-				   document.getElementById('viewinfo').innerHTML='".$info['Cmp_OtherInfo']."';
-		}
-		window.onload=viewprofile;
-	</script>
-		");
-?>
 </body>
 </html>
 <?php

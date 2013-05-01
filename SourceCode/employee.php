@@ -1,28 +1,29 @@
 <?php
+include('./db.inc.php');
   class Employee
 	{
-		$empID;
-		$name;
-		$age;
-		$dateOfBirth;
-		$address;
-		$universityName;
-		$courses;
-		$major;
-		$gradDate;
-		$interestDepartment;
-		$prefCity;
-		$internshipJob;
-		$cv;
-		$username;
-		$password;
-		$emailAddress;
-		$otherInfo;
+		public $empID;
+		public $name;
+		public $age;
+		public $dateOfBirth;
+		public $address;
+		public $universityName;
+		public $courses;
+		public $major;
+		public $gradDate;
+		public $interestDepartment;
+		public $prefCity;
+		public $internshipJob;
+		public $cv;
+		public $username;
+		public $password;
+		public $emailAddress;
+		public $otherInfo;
 			
 			
 		function constructFromDB($id)
 		{
-			$query = "SELECT * FROM employeer WHERE Emp_ID = " . $id;
+			$query = "SELECT * FROM employeer WHERE 'Emp_ID' = " . $id;
 			$result_set = mysql_query($query);
 			$this->empID = $id;
 			while($results = mysql_fetch_array($result_set))
@@ -35,31 +36,32 @@
 				$this->courses = $results['Emp_Courses'];
 				$this->major = $results['ECmp_Major'];
 				$this->gradDate = $results['Emp_GradDate'];
-				$this->interestDepartment = $results['Emp_IntAread'];
+				//$this->interestDepartment = $results['Emp_IntAread'];
 				$this->prefCity = $results['Emp_PrefCity'];
 				$this->internshipJob = $results['Emp_InternJob'];
-				$this->cv = $results['Emp_CV'];
+				//$this->cv = $results['Emp_CV'];
 				$this->username = $results['Emp_UName'];
 				$this->password = $results['Emp_Pass'];
 				$this->emailAddress = $results['Emp_Email'];
 				$this->otherInformation = $results['Emp_OtherInfo'];
 			}
 		}
-		function addEmployee($nName, $nAge, $nDOB, $nAddress , $nUniversity, $nCourses, $nMajor, $nGradDate, $nIntDept, $nPrefCity, $nIntJob, $nCV,
-			$nUsername, $nPassword, $nEmailAddress, $nOtherInfo)
+		//function addEmployee($nName, $nAge, $nDOB, $nAddress , $nUniversity, $nCourses, $nMajor, $nGradDate, $nIntDept, $nPrefCity, $nIntJob, $nCV,
+		//	$nUsername, $nPassword, $nEmailAddress, $nOtherInfo)
+		function addEmployee($nName, $nAge, $nDOB, $nAddress , $nUniversity, $nMajor, $nGradDate, $nPrefCity, $nIntJob,	$nUsername, $nPassword, $nEmailAddress, $nOtherInfo)		
 		{
 			$this->name = $nName;
 			$this->age = $nAge;
 			$this->dateOfBirth = $nDOB;
 			$this->address = $nAddress;
 			$this->universityName = $nUniversity;
-			$this->courses = $nCourses;
+			//$this->courses = $nCourses;
 			$this->major = $nMajor;
 			$this->gradDate = $nGradDate;
-			$this->interestDepartment = $nIntDept;
+			//$this->interestDepartment = $nIntDept;
 			$this->prefCity = $nPrefCity;
 			$this->internshipJob =$nIntJob;
-			$this->cv = $nCV;
+			//$this->cv = $nCV;
 			$this->username = $nUsername;
 			$this->password = $nPassword;
 			$this->emailAddress = $nEmailAddress;
@@ -89,8 +91,9 @@
 			}
 		}
 		
-		function editProfile($nName, $nAge, $nDOB, $nAddress , $nUniversity, $nCourses, $nMajor, $nGradDate, $nIntDept, $nPrefCity, $nIntJob, $nCV,
-			$nOtherInfo)
+		function editProfile($nName, $nAge, $nDOB, $nAddress , $nUniversity, $nMajor, $nGradDate, $nPrefCity, $nIntJob,	$nOtherInfo)
+		//function editProfile($nName, $nAge, $nDOB, $nAddress , $nUniversity, $nCourses, $nMajor, $nGradDate, $nIntDept, $nPrefCity, $nIntJob, $nCV,
+		//	$nOtherInfo)
 		{
 		
 			//void function
@@ -99,13 +102,13 @@
 			$this->dateOfBirth = $nDOB;
 			$this->address = $nAddress;
 			$this->universityName = $nUniversity;
-			$this->courses = $nCourses;
+			//$this->courses = $nCourses;
 			$this->major = $nMajor;
 			$this->gradDate = $nGradDate;
-			$this->interestDepartment = $nIntDept;
+			//$this->interestDepartment = $nIntDept;
 			$this->prefCity = $nPrefCity;
 			$this->internshipJob =$nIntJob;
-			$this->cv = $nCV;
+			//$this->cv = $nCV;
 			
 			$this->otherInfo = $nOtherInfo;
 		
@@ -131,7 +134,7 @@
 			`Emp_PrefCity` = '$this->prefCity',
 			`Emp_InternJob` = '$this->internshipJob',
 			`Emp_CV` = '$this->cv',
-			`Emp_OtherInfo` = '$otherInfo'
+			`Emp_OtherInfo` = '$this->otherInfo'
 			
 			
 			WHERE
@@ -139,6 +142,7 @@
 			
 			$resultsArray = array();
 			$result_set = mysql_query($query);
+			if ($result_set==true){
 			while ($myResults = mysql_fetch_array($result_set))
 			{
 				$resultsArray[] = $myResults['Job_ID'];
@@ -155,9 +159,10 @@
 				$resultsArray[] = $myResults['Job_Salary'];
 				$resultsArray[] = $myResults['Job_OtherInfo'];
 			}
-			
-			
 			return $resultsArray; //use $resultsArray[0]..[1]..[2].. etc. to access values
+			}
+			else{
+			}
 		}
 		
 			function getJobOpeningInfo($id)
