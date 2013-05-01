@@ -27,7 +27,7 @@
 
 	<div class="row-fluid">
     	<header class="span12 hero-unit ">
-        	<h1>Angry Bosses! A Job Portal </h1>
+		<img src = "./img/logo.png">
         </header>
     </div>
     
@@ -50,16 +50,17 @@
                             <label id="pass">Password</label>
                             <input class="input-medium" id="loginpass" type="password">
                           	<label id="login">Login as: </label>
-                            <select class="span2" required id="loginas">
+                            <select  required id="loginas">
                                 <option selected value="employee">Employee</option>
                                 <option value="employeer">Employeer</option>
                             </select>
                         </fieldset>
                     </form>
                     <div class="row-fluid">
-                    	<div class="span2"> <button  type="button" class="btn btn-primary" id="button"  data-loading-text="Logging in..." onClick="login()">Log In</button></div>
-                    	<div class="span3 offset2" id="loginstatus">Not Logged In.</div>
+                    	<div > <button  type="button" class="btn btn-primary" id="button"  data-loading-text="Logging in..." onClick="login()">Log In</button></div>
+                    	
                     </div>
+					<div class=" statusMessage" id="loginstatus">Not Logged In.</div>
             	</div>
             </section>
         </div>
@@ -78,7 +79,7 @@
                         	<label><b>Company Name</b></label>
                             <input class="input-xlarge" id="newcName" type="text"  placeholder="Comany Name">
                             <label><b>About</b></label>
-                            <textarea id="newcAbout" placeholder="About" class="span6" rows="6"></textarea>
+                            <textarea id="newcAbout" placeholder="About"  rows="6"></textarea>
                             <label><b>Number of Departments</b></label>
                             <input class="input-mini" id="newcNDept" type="number" onchange="makeList()" value="1" min="1" max="10" >
                             <label><b>Departments</b></label>
@@ -100,12 +101,13 @@
                             <label><b>Email Address</b></label>
                             <input class="input-large" id="newcEmail" type="email" placeholder="Email Address">
                             <label><b>Other Information</b></label>
-                            <textarea id="newcInfo" placeholder="Other Information" rows="6" class="span6"></textarea>
+                            <textarea id="newcInfo" placeholder="Other Information" rows="6" ></textarea>
                         </div>
                         <div class="row-fluid">
                         	<div class="span2"> <button  type="button" class="btn btn-primary" id="newcbutton"  data-loading-text="Processing..." onClick="newcsubmit()">Submit</button></div>
-                            <div class="span4 offset2" id="result"></div>
-                        </div>                        
+                            
+                        </div>                     
+					<div  class=" statusMessage" id="result"></div>   
                     </div>
                     <div style="margin-top:25px" >
                     </div>
@@ -118,7 +120,7 @@
                         	<label><b>Employee Name</b></label>
                             <input class="input-large" id="newempDOB" type="date"  placeholder="Employee DOB">
                             <label><b>Employee Address</b></label>
-                            <textarea id="neweAddress" placeholder="Employee Address" class="span6" rows="6"></textarea>
+                            <textarea id="neweAddress" placeholder="Employee Address"  rows="6"></textarea>
                             <label><b>University Name</b></label>
                             <input class="input-xlarge" id="newempUni" type="text" placeholder="University Name" >
                             <label><b>Employee Major</b></label>
@@ -143,7 +145,7 @@
                             <label><b>Preferred City</b></label>
                             <input class="input-medium" id="neweCity" type="text" placeholder="Preferred City" >
                             <label><b>Looking for</b></label>
-                            <select class="span1" required id="lookingfor">
+                            <select required id="lookingfor">
                             	<option value="Internship">Internship</option>
                                 <option value="Job">Job</option>
                             </select>
@@ -154,13 +156,14 @@
                             <label><b>Email Address</b></label>
                             <input class="input-large" id="neweemail" type="email" placeholder="Email Address">
                             <label><b>Other Information</b></label>
-                            <textarea id="neweInfo" placeholder="Other Information" rows="6" class="span6"></textarea>
+                            <textarea id="neweInfo" placeholder="Other Information" rows="6" ></textarea>
                         </div>
                         <div class="row-fluid">
                           <div class="span2"> <button  type="button" class="btn btn-primary" id="newebutton"  data-loading-text="Processing..." onClick="newesubmit()">Submit</button></div>
                         </div> 
-                        <div class="span4 offset1" id="signupemp"></div>                    
+                           <div class="statusMessage" id="signupemp"></div>             
                     </div>
+					
                     <div style="margin-top:25px" >
                     </div>
             	
@@ -383,6 +386,8 @@
 	</script>");
 	?>
 
-
+<div class = "span12 hero-unit footer">
+AngryBosses 2013. All Rights Reserved.
+</div>
 </body>
 </html>
