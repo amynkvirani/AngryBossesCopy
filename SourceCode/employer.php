@@ -42,18 +42,17 @@
 		function constructFromDB($id)
 		{
 			//enter SQL statement to go through db and update all
-			$query = "SELECT * FROM employeer WHERE Cmp_ID = '" . $id."'";
+			$query = "SELECT * FROM employeer WHERE Cmp_ID = " . $id;
 			$result_set = mysql_query($query);
+			$this->companyID = $id;
 			while($results = mysql_fetch_array($result_set))
 			{
-				$name = $results['Cmp_Name'];
-				$about = $results['Cmp_About'];
-				$UName = $results['Cmp_UName'];
-				$Cmp_Email = $results['Cmp_Email'];
-				$otherInformation = $results['Cmp_OtherInfo'];
-				$companyID=$id;
+				$this->name = $results['Cmp_Name'];
+				$this->about = $results['Cmp_About'];
+				$this->UName = $results['Cmp_UName'];
+				$this->Cmp_Email = $results['Cmp_Email'];
+				$this->otherInformation = $results['Cmp_OtherInfo'];
 			}
-			$companyID=$id;
 		}
 
 
@@ -75,6 +74,7 @@
 
 
 		//function editProfile($cName,$cAbout,$cDepartments, $cDepartmentSize, $cUName,$cPassword,$cEmail,$cOtherInformation)
+		//for change later
 		function editProfile($cName,$cAbout, $cUName,$cPassword,$cEmail,$cOtherInformation)
 		{
 			//void function
