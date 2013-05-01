@@ -1,6 +1,7 @@
 <?php
 
 include('./db.inc.php');
+include('./employer.php')
 
 // if data are received via POST, with index of 'test'
 if (isset($_POST['compname']) && isset($_POST['abt']) && isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['emailid']) && isset($_POST['info'])) {
@@ -10,7 +11,9 @@ if (isset($_POST['compname']) && isset($_POST['abt']) && isset($_POST['uname']) 
 	$pass = $_POST['pass'];
 	$emailid = $_POST['emailid'];
 	$info = $_POST['info'];
-	$q="INSERT INTO `employeer`(`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`) VALUES ('$compname','$abt','$uname','$pass','$emailid','$info')";
+	$newEmployer = new Employer();
+	$newEmployer->addEmployer($compname,$abt,$uname,$pass,$emailid,$info);
+	//$q="INSERT INTO `employeer`(`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`) VALUES ('$compname','$abt','$uname','$pass','$emailid','$info')";
 	//echo $q;
 	#$query1=mysql_query("INSERT INTO `employeer`(`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`) VALUES ('$compname','$abt','$uname','$pass','$emailid','$info')");
 	#if (!$query1){

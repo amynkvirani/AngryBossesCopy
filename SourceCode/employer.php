@@ -1,11 +1,12 @@
 <?php
+	include('./db.inc.php');
 	Class Employer{
 		
 		public $companyID;
 		public $name;
 		public $about;
 		public $departments;
-		public $universityName;
+		public $UName;
 		public $password;
 		public $email;
 		public $otherInformation;
@@ -43,12 +44,11 @@
 			//enter SQL statement to go through db and update all
 			$query = "SELECT * FROM employeer WHERE Cmp_ID = " . $id;
 			$result_set = mysql_query($query);
-			
 			while($results = mysql_fetch_array($result_set))
 			{
 				$name = $results['Cmp_Name'];
 				$about = $results['Cmp_About'];
-				$universityName = $results['Cmp_UName'];
+				$UName = $results['Cmp_UName'];
 				$Cmp_Email = $results['Cmp_Email'];
 				$otherInformation = $results['Cmp_OtherInfo'];
 			}
@@ -72,28 +72,29 @@
 		}
 		
 		
-		function editProfile($cName,$cAbout,$cDepartments, $cDepartmentSize, $cUniversityName,$cPassword,$cEmail,$cOtherInformation)
+		//function editProfile($cName,$cAbout,$cDepartments, $cDepartmentSize, $cUName,$cPassword,$cEmail,$cOtherInformation)
+		function editProfile($cName,$cAbout, $cUName,$cPassword,$cEmail,$cOtherInformation)
 		{
 			//void function
 			$name = $cName;
 			$about = $cAbout;
-			$departments = $cDepartments;
-			$universityName = $cUniversityName;
+			//$departments = $cDepartments;
+			$UName = $cUName;
 			$password = $cPassword;
-			$emailAdd = cEmail;
+			$emailAdd = $cEmail;
 			$otherInformation = $cOtherInformation;
 			$this->updateEmployer();
-			$this->updateDepartments();
+			//$this->updateDepartments();
 		}
 		
-		function addEmployer($cName,$cAbout,$cUniversityName,$cPassword,$cEmail,$cOtherInformation)
+		function addEmployer($cName,$cAbout,$cUName,$cPassword,$cEmail,$cOtherInformation)
 		{	// adds a new employer to the system, and sets the current employer object equal to the newly added employer ...
 			$name = $cName;
 			$about = $cAbout;
-			$departments = $cDepartments;
-			$universityName = $cUniversityName;
+			//$departments = $cDepartments;
+			$UName = $cUName;
 			$password = $cPassword;
-			$emailAdd = cEmail;
+			$emailAdd = $cEmail;
 			$otherInformation = $cOtherInformation;
 			$companyID = $this->addNewEmployer();
 			
@@ -102,7 +103,7 @@
 		function addNewEmployer()
 		{
 			$query = "INSERT INTO `employeer` (`Cmp_Name`, `Cmp_About`, `Cmp_UName`, `Cmp_Pass`, `Cmp_Email`, `Cmp_OtherInfo`)
-						VALUES ('$name','$about','$universityName','$password','$emailAdd','$otherInformation')";
+						VALUES ('$name','$about','$UName','$password','$emailAdd','$otherInformation')";
 			$result_set = mysql_query($query);
 			confirm_query($result_set);
 			
@@ -124,7 +125,7 @@
 			
 			`Cmp_Name` = '$name',
 			`Cmp_About` = '$about',
-			`Cmp_UName` = '$universityName',
+			`Cmp_UName` = '$UName',
 			`Cmp_Email` = '$emailAdd',
 			`Cmp_OtherInfo` = '$otherInformation'
 			WHERE
@@ -138,7 +139,7 @@
 		function getAllInformation()
 		{
 			//returns an array
-			return array($companyID, $name, $about, $departments,$universityName,$email,$otherInformation);
+			return array($companyID, $name, $about, $departments,$UName,$email,$otherInformation);
 		}
 		
 		function getAllMyOpenings()

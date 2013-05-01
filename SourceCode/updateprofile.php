@@ -34,10 +34,15 @@ elseif (isset($_POST['name']) && isset($_POST['about']) && isset($_POST['uname']
 	$email=$_POST['email'];
 	$info=$_POST['info'];
 
-	$query1=mysql_query("UPDATE `employeer` SET `Cmp_Name`='".$name."',`Cmp_About`='".$about."',`Cmp_UName`='".$uname."',`Cmp_Pass`='".$pass."',`Cmp_Email`='".$email."',`Cmp_OtherInfo`='".$info."' WHERE `Cmp_ID`='".getEmployerID()."'");
-	if (!$query1){
-		die('Could not enter data: ' . mysql_error());	
-	}
+	$thisEmployer = new Employer();
+	$id=getEmployerID();
+	$thisEmployer->constructFromDB($id);
+	$thisEmployer->editProfile($name,$about,$uname,$pass,$email,$info);
+
+//	$query1=mysql_query("UPDATE `employeer` SET `Cmp_Name`='".$name."',`Cmp_About`='".$about."',`Cmp_UName`='".$uname."',`Cmp_Pass`='".$pass."',`Cmp_Email`='".$email."',`Cmp_OtherInfo`='".$info."' WHERE `Cmp_ID`='".getEmployerID()."'");
+//	if (!$query1){
+//		die('Could not enter data: ' . mysql_error());	
+//	}
 	echo json_encode(array("name" => "$name", "about" => "$about", "uname" => "$uname", "pass" => "$pass", "email" => "$email", "info" => "$info"));
 }
 ?>
